@@ -1,0 +1,164 @@
+{
+  "info": {
+    "name": "NeedBridge Backend Demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "donationId",
+      "value": ""
+    },
+    {
+      "key": "matchId",
+      "value": ""
+    },
+    {
+      "key": "pickupId",
+      "value": ""
+    },
+    {
+      "key": "verificationCode",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "1 - Login Donor",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"priya@needbridge.demo\",\n  \"password\": \"Test@123\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      }
+    },
+    {
+      "name": "2 - Create Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"category\": \"Education\",\n  \"itemName\": \"School Backpack\",\n  \"description\": \"Five school bags in good condition\",\n  \"quantity\": 5,\n  \"condition\": \"GOOD\",\n  \"imageUrl\": \"https://example.com/backpacks.jpg\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/api/donations",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "donations"
+          ]
+        }
+      }
+    },
+    {
+      "name": "3 - Analyze Donation",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/donations/{{donationId}}/analyze",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "donations",
+            "{{donationId}}",
+            "analyze"
+          ]
+        }
+      }
+    },
+    {
+      "name": "4 - Generate Matches",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/donations/{{donationId}}/matches",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "donations",
+            "{{donationId}}",
+            "matches"
+          ]
+        }
+      }
+    },
+    {
+      "name": "5 - Accept Match",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/donations/matches/{{matchId}}/accept",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "donations",
+            "matches",
+            "{{matchId}}",
+            "accept"
+          ]
+        }
+      }
+    }
+  ]
+}
